@@ -5,4 +5,4 @@ install:
   - composer install
 before_script: echo 'date.timezone = "PRC"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 script:
-  - phpunit --configuration phpunit.xml
+  - vendor/bin/phpunit --configuration phpunit.xml

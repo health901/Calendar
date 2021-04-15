@@ -391,8 +391,9 @@ class Calendar
 
         return preg_replace_callback('/\w/', function ($matches) {
             $expressions = $this->expression();
-            $key = $matches[0];
-            if (isset($expressions[$key])) {
+            var_dump($matches);
+            if (isset($expressions[$matches[0]])) {
+                $key = $matches[0];
                 //缓存
                 if (isset($this->dataCache[$key])) {
                     return $this->dataCache[$key];

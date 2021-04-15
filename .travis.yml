@@ -1,0 +1,7 @@
+language: php
+php:
+  - '7.0'
+  -  '7.1.9'
+  - hhvm # on Trusty only
+  - nightly
+before_script: echo 'date.timezone = "PRC"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini

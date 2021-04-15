@@ -5,7 +5,7 @@
 ![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/vrobin/calendar)
 ![Packagist License](https://img.shields.io/packagist/l/vrobin/calendar)
 [![Build Status](https://travis-ci.com/health901/Calendar.svg?branch=master)](https://travis-ci.com/health901/Calendar)
-[![Version](https://poser.pugx.org/vkrobin/calendar/version)](//packagist.org/packages/vkrobin/calendar)
+[![Version](https://poser.pugx.org/vrobin/calendar/version)](//packagist.org/packages/vrobin/calendar)
 ---
 ## 安装
 `composer require vrobin/calendar`

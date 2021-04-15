@@ -353,7 +353,7 @@ class Calendar
             'X' => [$this, 'getConstellation'],
             'e' => [$this, 'getDayTiangan'],
             'a' => [$this, 'getDayDizhi'],
-            'j' => $this->solarTerm[$this->solarTermIndex],
+            'j' => [$this, 'getSolarTerm'],
             'w' => [$this, 'getHourTiangan'],
             'l' => [$this, 'getHourDizhi']
         ];
@@ -391,7 +391,6 @@ class Calendar
 
         return preg_replace_callback('/\w/', function ($matches) {
             $expressions = $this->expression();
-            var_dump($matches);
             if (isset($expressions[$matches[0]])) {
                 $key = $matches[0];
                 //缓存
@@ -502,13 +501,21 @@ class Calendar
         return $this->zhi[$index];
     }
 
+    protected function getSolarTerm()
+    {
+        if ($this->solarTermIndex === null) {
+            $this->getSolarTermMonth();
+        }
+        return $this->solarTerm[$this->solarTermIndex];
+    }
+
     protected function getSolarTermMonth()
     {
         //一个月两个节气
         //取当前月的两个节气
         $month = $this->month();
         $start = ($month - 1) * 2 + 1;
-        if (!$this->solarTermIndex) {
+        if ($this->solarTermIndex === null) {
             $firstTermDay = (int)$this->getTermByNo($start % 24);
             $secondTermDay = (int)$this->getTermByNo(($start + 1) % 24);
             if ($this->day() < $firstTermDay) {

@@ -197,7 +197,7 @@ class Calendar
         return $this;
     }
 
-    public static function createFromLunar($year, $month, $day, $isLeap = false)
+    public static function createFromLunar($year, $month, $day, $isLeap = false): Calendar
     {
         $calendar = new self();
         return $calendar->_createFromLunar($year, $month, $day, $isLeap);
@@ -213,34 +213,23 @@ class Calendar
         return $this;
     }
 
-    /**
-     * alias for createFromSolar
-     * @param $date
-     * @return Calendar
-     * @throws InvalidateDateException
-     */
-    public function create($date): Calendar
-    {
-        return $this->createFromSolar($date);
-    }
-
     public static function isLeapYear($year): bool
     {
         return ($year % 4 == 0 && $year % 100 != 0) || ($year % 400 == 0);
     }
 
 
-    protected function year()
+    protected function year(): int
     {
         return intval($this->date->format("Y"));
     }
 
-    public function month()
+    public function month(): int
     {
         return intval($this->date->format('n'));
     }
 
-    public function day()
+    public function day(): int
     {
         return intval($this->date->format('j'));
     }
@@ -407,7 +396,7 @@ class Calendar
         }, $format);
     }
 
-    protected function getLunarMonth()
+    protected function getLunarMonth(): string
     {
         return ($this->isLeapMonth ? '闰' : '') . $this->monthAlias[$this->lunarMonth - 1];
     }
@@ -424,10 +413,10 @@ class Calendar
      *  $_24 = $this->getTerm(1987,3) ;// _24 = 4; 意即 1987 年 2 月 4 日立春
      * </pre>
      */
-    protected function getTermByNo($no): int
+    protected function getTermByNo(int $no): int
     {
         if ($this->year() < 1900 || $this->year() > 2100) {
-            return -1;
+            throw new InvalidateDateException();
         }
         if ($no < 1 || $no > 24) {
             return -1;
@@ -506,7 +495,7 @@ class Calendar
         if ($this->solarTermIndex === null) {
             $this->getSolarTermMonth();
         }
-        return $this->solarTerm[$this->solarTermIndex];
+        return $this->solarTerm[$this->solarTermIndex - 1];
     }
 
     protected function getSolarTermMonth()

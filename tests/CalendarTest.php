@@ -23,6 +23,9 @@ class CalendarTest extends TestCase
         $this->assertEquals('戊申年 猴 闰五月初四', Calendar::createFromSolar('2028-06-26')->lunarFormat('TD年 S Y月R'));
         $this->assertEquals('2028-05-27', Calendar::createFromLunar(2028, 5, 4)->solarDate()->format('Y-m-d'));
         $this->assertEquals('2028-06-26', Calendar::createFromLunar(2028, 5, 4, true)->solarDate()->format('Y-m-d'));
+        //节气
+        $this->assertEquals('清明', Calendar::createFromSolar('2021-04-04')->lunarFormat('j'));
+        $this->assertEquals('谷雨', Calendar::createFromSolar('2021-04-21')->lunarFormat('j'));
 
         $cal = Calendar::createFromSolar('1989-02-06');
         $this->assertEquals('丙寅', $cal->lunarFormat('rs'), '月干支');

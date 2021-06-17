@@ -257,11 +257,12 @@ class Calendar
         $go = 0;
         $months = $this->lunarData->getMonthDays();
         $leapMonth = $this->lunarData->getLeapMonth();
+
         if ($leapMonth) {
             array_splice($months, $leapMonth, 0, $this->lunarData->getLeapDays());
         }
         foreach ($months as $k => $md) {
-            if ($md + $go > $days) {
+            if ($md + $go >= $days) {
                 $this->lunarMonth = $leapMonth ? ($k + 1 <= $leapMonth ? $k + 1 : $k) : $k + 1;
                 $this->isLeapMonth = ($this->lunarMonth == $leapMonth) && ($k == $leapMonth);
                 $this->lunarDay = $days - $go;
